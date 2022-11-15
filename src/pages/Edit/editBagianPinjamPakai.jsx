@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { Image } from "react-bootstrap";
 import { SideMenu } from "../../components/SideMenu";
 import { Navbar } from "../../components/Navbar";
 
