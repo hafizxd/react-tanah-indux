@@ -1,8 +1,20 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { DashboardTableRow } from "../components/Dashboard/DashboardTableRow";
 import { Navbar } from "../components/Navbar";
 import { SideMenu } from "../components/SideMenu";
+import { getUser } from "../redux/action/userAction";
 
 export const Dashboard = () => {
+  // const dispatch = useDispatch();
+  // const { isLoading, data: user, error } = useSelector((state) => state.user);
+
+  // useEffect(() => {
+  //   dispatch(getUser());
+  // }, [dispatch]);
+
+  // console.log(user);
+  // if (user?.roles?.id === "1") {
   return (
     <div className="d-flex ">
       <SideMenu />
@@ -114,4 +126,12 @@ export const Dashboard = () => {
       </div>
     </div>
   );
+  //   } else {
+  //   return (
+  //     <div className="side-menu border">
+  //       pe
+  //     </div>
+  //   );
+  // }
+  
 };

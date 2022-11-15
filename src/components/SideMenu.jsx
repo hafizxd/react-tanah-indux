@@ -6,13 +6,14 @@ import { getUser } from "../redux/action/userAction";
 
 export const SideMenu = () => {
   // const dispatch = useDispatch();
-  // const { isLoading, dataAuth, error } = useSelector((state) => state.user);
+  // const { isLoading, data: user, error } = useSelector((state) => state.user);
 
   // useEffect(() => {
   //   dispatch(getUser());
   // }, [dispatch]);
 
-  // if (upt === "pusdajatim") {
+  // console.log(user.id);
+  // if (user?.roles?.id === "1") {
     return (
       <div className="side-menu border">
         <Link
