@@ -1,5 +1,4 @@
 import "./App.css";
-import store from "./redux/store";
 import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { Login } from "./pages/Login";
@@ -30,7 +29,6 @@ import { EditBagianPppsUPT } from "./pages/UPT/EditUPT/editBagianPppsUPT";
 
 function App() {
   return (
-    <Provider store={store}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
@@ -71,7 +69,6 @@ function App() {
           />
         </Routes>
       </BrowserRouter>
-    </Provider>
   );
 }
 
