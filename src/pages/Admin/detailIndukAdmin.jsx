@@ -46,7 +46,7 @@ export const DetailIndukAdmin = ({ upt }) => {
           <div className="d-flex gap-2">
             <ButtonDelete />
             <Link
-              to={"/upt/" + params.id + "/edit-tanah-induk"}
+              to={"/upt/" + params.id + "/admin/edit-induk"}
               className="primary-btn px-4"
             >
               Ubah Data

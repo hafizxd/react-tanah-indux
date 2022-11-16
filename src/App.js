@@ -39,8 +39,8 @@ function App() {
           <Route path="/dashboard/admin" element={<DashboardAdmin />} />
           <Route path="/upt/:id/admin" element={<TanahIndukAdmin />} />
           <Route path="/upt/:id/admin/detail" element={<DetailIndukAdmin />} />
-          <Route path="/upt/:id/admin/tambahinduk" element={<TambahIndukAdmin />} />
-          <Route path="/upt/:id/admin/edit" element={<EditIndukAdmin />} />
+          <Route path="/upt/:id/admin/tambah-induk" element={<TambahIndukAdmin />} />
+          <Route path="/upt/:id/admin/edit-induk" element={<EditIndukAdmin />} />
           <Route path="/upt/:id/admin/detail/tanah-bagian-sr" element={<DetailBagianSrAdmin />} />
           <Route path="/upt/:id/admin/detail/tambah-bagian-sr" element={<TambahBagianSrAdmin />} />
           <Route path="/upt/:id/admin/detail/tanah-bagian-sr/edit" element={<EditBagianSrAdmin />} />
@@ -51,16 +51,14 @@ function App() {
           <Route path="/dashboard/UPT" element={<DashboardUPT />} />
           <Route path="/upt/:id/UPT" element={<TanahIndukUPT />} />
           <Route path="/upt/:id/UPT/detail" element={<DetailIndukUPT />} />
-          <Route path="/upt/:id/UPT/tambahinduk" element={<TambahIndukUPT />} />
-          <Route path="/upt/:id/UPT/edit" element={<EditIndukUPT />} />
+          <Route path="/upt/:id/UPT/tambah-induk" element={<TambahIndukUPT />} />
+          <Route path="/upt/:id/UPT/edit-induk" element={<EditIndukUPT />} />
           <Route path="/upt/:id/UPT/detail/tanah-bagian-sr" element={<DetailBagianSrUPT />} />
           <Route path="/upt/:id/UPT/detail/tambah-bagian-sr" element={<TambahBagianSrUPT />} />
           <Route path="/upt/:id/UPT/detail/tanah-bagian-sr/edit" element={<EditBagianSrUPT />} />
           <Route path="/upt/:id/UPT/detail/tanah-bagian-ppps" element={<DetailBagianPppsUPT />} />
           <Route path="/upt/:id/UPT/detail/tambah-bagian-ppps" element={<TambahBagianPppsUPT />} />
           <Route path="/upt/:id/UPT/detail/tanah-bagian-ppps/edit" element={<EditBagianPppsUPT />} />
-
-
 
           <Route
             path="*"
