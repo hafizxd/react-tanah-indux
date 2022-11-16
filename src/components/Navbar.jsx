@@ -13,10 +13,10 @@ export const Navbar = () => {
     navigate("/");
   };
   
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token == null) navigate("/");
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (token == null) navigate("/");
+  // }, []);
 
   switch (id) {
     case "pusdajatim":
