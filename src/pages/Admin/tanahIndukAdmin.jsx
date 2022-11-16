@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import LayoutAdmin from "../../components/Layout/layoutAdmin";
 import { DeleteConfirmation } from "../../components/UPTDashboard/DeleteConfirmation";
+import { IndukTableRowAdmin } from "../../components/UPTDashboard/IndukTableRowAdmin";
 import { UPTDashboardTableRow } from "../../components/UPTDashboard/UPTDashboardTableRow";
 
 export const TanahIndukAdmin = () => {
@@ -95,7 +96,7 @@ export const TanahIndukAdmin = () => {
             <div className="row m-0">
               {data.map((item) => {
                 return (
-                  <UPTDashboardTableRow
+                  <IndukTableRowAdmin
                     upt={params.id}
                     key={item.id}
                     id={item.id}
