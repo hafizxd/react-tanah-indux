@@ -83,7 +83,7 @@ export const TanahIndukUPT = () => {
                 aria-label="Search"
               ></input>
               <Link
-                to={"/upt/" + params.id + "/tambah"}
+                to={"/upt/" + params.id + "/upt/tambah-induk"}
                 className="primary-btn d-flex justify-content-center align-items-center"
               >
                 Tambah Induk

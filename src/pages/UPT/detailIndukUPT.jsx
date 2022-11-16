@@ -1,10 +1,11 @@
 import { useNavigate, Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import LayoutUPT from "../../components/Layout/layoutUPT";
-import { ModalTambahBagian } from "../../components/Modal/ModalTambahBagian";
 import { ButtonDelete } from "../../components/Button/ButtonDelete";
-import { TableBagian } from "../../components/Table/TableBagian";
-import { TableBagianPinjamPakai } from "../../components/Table/TabelBagianPinjamPakai";
+import { TableBagianPpps } from "../../components/Table/TableUPT/TableBagianPpps";
+import { TableBagianSr } from "../../components/Table/TableUPT/TableBagianSr";
+import { ModalTambahBagianUPT } from "../../components/Modal/ModalTambahBagianUPT/ModalTambahBagianUPT";
+
 
 export const DetailIndukUPT = ({ upt }) => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export const DetailIndukUPT = ({ upt }) => {
 
   return (
     <LayoutUPT>
-      <ModalTambahBagian
+      <ModalTambahBagianUPT
         show={show}
         handleClose={handleClose}
         handleShow={handleShow}
@@ -46,7 +47,7 @@ export const DetailIndukUPT = ({ upt }) => {
           <div className="d-flex gap-2">
             <ButtonDelete />
             <Link
-              to={"/upt/" + params.id + "/edit-tanah-induk"}
+              to={"/upt/" + params.id + "/upt/edit-induk"}
               className="primary-btn px-4"
             >
               Ubah Data
@@ -122,11 +123,11 @@ export const DetailIndukUPT = ({ upt }) => {
             </div>
           </div>
           <div className="table-tanah-bagian">
-            <TableBagian upt={params.id} />
-            <TableBagian upt={params.id} />
-            <TableBagian upt={params.id} />
-            <TableBagianPinjamPakai upt={params.id} />
-            <TableBagianPinjamPakai upt={params.id} />
+            <TableBagianPpps upt={params.id} />
+            <TableBagianPpps upt={params.id} />
+            <TableBagianPpps upt={params.id} />
+            <TableBagianSr upt={params.id} />
+            <TableBagianSr upt={params.id} />
           </div>
         </div>
       </div>

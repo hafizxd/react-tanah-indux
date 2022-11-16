@@ -42,16 +42,10 @@ export const DashboardUPT = () => {
             <div className="col d-flex flex-col align-items-center justify-content-center">
               TOTAL PINJAM PAKAI
               <br />
-              <div className="row py-2">
-                <div className="col">TANAH(M)</div>
-              </div>
             </div>
             <div className="col d-flex flex-col align-items-center justify-content-center">
               TOTAL PAKAI SENDIRI
               <br />
-              <div className="row py-2">
-                <div className="col">TANAH(M)</div>
-              </div>
             </div>
             <div className="col d-flex flex-col align-items-center justify-content-center">
               TOTAL SEWA/SIP BMD

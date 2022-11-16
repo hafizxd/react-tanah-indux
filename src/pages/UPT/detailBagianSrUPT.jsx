@@ -37,7 +37,7 @@ export const DetailBagianSrUPT = () => {
         <div className="d-flex gap-2">
           <ButtonDelete />
           <Link
-            to={"/upt/" + params.id + "/detail/tanah-bagian/edit2"}
+            to={"/upt/" + params.id + "/upt/detail/tanah-bagian-sr/edit"}
             className="primary-btn"
           >
             Ubah Data

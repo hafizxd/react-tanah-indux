@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate, useParams } from "react-router-dom";
 
-export const ModalTambahBagian = ({ show, handleClose }) => {
+export const ModalTambahBagianUPT = ({ show, handleClose }) => {
   const navigate = useNavigate();
   const params = useParams();
   return (
@@ -20,7 +20,7 @@ export const ModalTambahBagian = ({ show, handleClose }) => {
             <Button
               className="primary-btn"
               onClick={() => {
-                navigate("/upt/"+params.id+"/admin/detail/tambah-bagian-ppps");
+                navigate("/upt/"+params.id+"/upt/detail/tambah-bagian-ppps");
               }}
             >
               Pakai Sendiri / Pinjam Pakai
@@ -30,7 +30,7 @@ export const ModalTambahBagian = ({ show, handleClose }) => {
             <Button
               className="primary-btn"
               onClick={() => {
-                navigate("/upt/"+params.id+"/admin/detail/tambah-bagian-sr");
+                navigate("/upt/"+params.id+"/upt/detail/tambah-bagian-sr");
               }}
             >
               Sewa / Retribusi

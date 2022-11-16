@@ -5,7 +5,7 @@ export const SideMenuAdmin = () => {
     return (
       <div className="side-menu border">
         <Link
-          to="/dashboard"
+          to="/dashboard/admin"
           className="side-menu-header d-flex justify-content-center"
         >
           <img className="w-75 p-4" src="/logo.png" alt="logo" />
