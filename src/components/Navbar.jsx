@@ -30,7 +30,7 @@ export const Navbar = () => {
             <Dropdown.Toggle variant="none" id="dropdown-basic">
               <div className="d-flex align-items-center gap-2 h-100">
                 <span>
-                  Hi, <span className="text-cyanblue font-semibold">PUS-SDA</span>
+                  Hi, <span className="text-cyanblue font-semibold">Nama!</span>
                 </span>
                 <div className="profile-picture bg-cyanblue"></div>
               </div>
@@ -63,7 +63,7 @@ export const Navbar = () => {
             <Dropdown.Toggle variant="none" id="dropdown-basic">
               <div className="d-flex align-items-center gap-2 h-100">
                 <span>
-                  Hi, <span className="text-cyanblue font-semibold">Kediri</span>
+                  Hi, <span className="text-cyanblue font-semibold">Nama!</span>
                 </span>
                 <div className="profile-picture bg-cyanblue"></div>
               </div>
@@ -96,7 +96,7 @@ export const Navbar = () => {
             <Dropdown.Toggle variant="none" id="dropdown-basic">
               <div className="d-flex align-items-center gap-2 h-100">
                 <span>
-                  Hi, <span className="text-cyanblue font-semibold">Lumajang</span>
+                  Hi, <span className="text-cyanblue font-semibold">Nama!</span>
                 </span>
                 <div className="profile-picture bg-cyanblue"></div>
               </div>
@@ -129,7 +129,7 @@ export const Navbar = () => {
             <Dropdown.Toggle variant="none" id="dropdown-basic">
               <div className="d-flex align-items-center gap-2 h-100">
                 <span>
-                  Hi, <span className="text-cyanblue font-semibold">Bondowoso</span>
+                  Hi, <span className="text-cyanblue font-semibold">Nama!</span>
                 </span>
                 <div className="profile-picture bg-cyanblue"></div>
               </div>
@@ -162,7 +162,7 @@ export const Navbar = () => {
             <Dropdown.Toggle variant="none" id="dropdown-basic">
               <div className="d-flex align-items-center gap-2 h-100">
                 <span>
-                  Hi, <span className="text-cyanblue font-semibold">Pasuruan</span>
+                  Hi, <span className="text-cyanblue font-semibold">Nama!</span>
                 </span>
                 <div className="profile-picture bg-cyanblue"></div>
               </div>
@@ -195,7 +195,7 @@ export const Navbar = () => {
             <Dropdown.Toggle variant="none" id="dropdown-basic">
               <div className="d-flex align-items-center gap-2 h-100">
                 <span>
-                  Hi, <span className="text-cyanblue font-semibold">Bojonegoro</span>
+                  Hi, <span className="text-cyanblue font-semibold">Nama!</span>
                 </span>
                 <div className="profile-picture bg-cyanblue"></div>
               </div>
@@ -228,7 +228,7 @@ export const Navbar = () => {
             <Dropdown.Toggle variant="none" id="dropdown-basic">
               <div className="d-flex align-items-center gap-2 h-100">
                 <span>
-                  Hi, <span className="text-cyanblue font-semibold">Pamekasan</span>
+                  Hi, <span className="text-cyanblue font-semibold">Nama!</span>
                 </span>
                 <div className="profile-picture bg-cyanblue"></div>
               </div>

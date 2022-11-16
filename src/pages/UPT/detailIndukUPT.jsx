@@ -6,7 +6,6 @@ import { TableBagianPpps } from "../../components/Table/TableUPT/TableBagianPpps
 import { TableBagianSr } from "../../components/Table/TableUPT/TableBagianSr";
 import { ModalTambahBagianUPT } from "../../components/Modal/ModalTambahBagianUPT/ModalTambahBagianUPT";
 
-
 export const DetailIndukUPT = ({ upt }) => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -112,6 +111,12 @@ export const DetailIndukUPT = ({ upt }) => {
                 placeholder="Search"
                 aria-label="Search"
               ></input>
+              <div
+                className="secondary-btn d-flex align-items-center me-2"
+                style={{ padding: "0 15px" }}
+              >
+                Import
+              </div>
               <div
                 className="primary-btn d-flex justify-content-center align-items-center"
                 onClick={() => {

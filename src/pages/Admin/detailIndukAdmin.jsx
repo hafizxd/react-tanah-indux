@@ -112,6 +112,12 @@ export const DetailIndukAdmin = ({ upt }) => {
                 aria-label="Search"
               ></input>
               <div
+                className="secondary-btn d-flex align-items-center me-2"
+                style={{ padding: "0 15px" }}
+              >
+                Import
+              </div>
+              <div
                 className="primary-btn d-flex justify-content-center align-items-center"
                 onClick={() => {
                   setShow(true);
