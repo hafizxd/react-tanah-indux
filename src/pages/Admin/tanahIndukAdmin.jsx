@@ -9,7 +9,6 @@ export const TanahIndukAdmin = () => {
   const [openEditTanah, setOpenEditTanah] = useState(false);
   const [show, setShow] = useState(false);
   const params = useParams();
-  // console.log(params);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -35,9 +34,36 @@ export const TanahIndukAdmin = () => {
 
   const [data, setData] = useState([]);
 
-  useEffect(async () => {
-    let res = await fetch(apiUrl + '');
-  }, []);
+  useEffect(() => {
+      const fetchData = async () => {
+        let token = localStorage.getItem('token');
+
+        try {
+          let res = await fetch(apiUrl + 'parent', {
+            method: "GET",
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+              'Authorization': 'Bearer ' + token
+            },
+          });
+
+          let resJson = await res.json();
+
+          if (res.status != 200) {
+            return console.log(resJson.message);
+          }
+
+          
+          let resData = resJson.data.data;
+          console.log(resData);
+          setData(resData);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      fetchData().catch(console.error);
+  }, [params.id]);
 
   const toggleEditTanah = () => {
     if (openEditTanah) {
@@ -85,12 +111,12 @@ export const TanahIndukAdmin = () => {
                     upt={params.id}
                     key={item.id}
                     id={item.id}
-                    sertifikatNomor={item.sertifikatNomor}
-                    hakPakaiTanggal={item.hakPakaiTanggal}
-                    namaJenisBarang={item.namaJenisBarang}
-                    nilaiAset={item.nilaiAset}
-                    alamat={item.alamat}
-                    luas={item.luas}
+                    sertifikatNomor={item.certificate_number}
+                    hakPakaiTanggal={item.certificate_date}
+                    namaJenisBarang={item.item_name}
+                    nilaiAset={item.asset_value}
+                    alamat={item.address}
+                    luas={item.large}
                     handleShow={handleShow}
                     toggleTambahTanah={toggleEditTanah}
                     setFormData={setFormData}
