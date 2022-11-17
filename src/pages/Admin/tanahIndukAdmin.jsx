@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import LayoutAdmin from "../../components/Layout/layoutAdmin";
 import { DeleteConfirmation } from "../../components/UPTDashboard/DeleteConfirmation";
@@ -12,6 +12,7 @@ export const TanahIndukAdmin = () => {
   // console.log(params);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   //format date into yyyy-mm-dd with leading zero
   const formatDate = (date) => {
@@ -32,27 +33,11 @@ export const TanahIndukAdmin = () => {
     luas: "",
   });
 
-  const [data, setData] = useState([
-    {
-      id: 1,
-      sertifikatNomor: "39",
-      hakPakaiTanggal: "08/09/2015",
-      namaJenisBarang: "TANAH KANTOR",
-      nilaiAset: "Rp20.000.000",
-      alamat: "JL. TRUNOJOYO NO.3, KEPATIHAN, KEC.BOJONEGORO, JAWA TIMUR 62111",
-      luas: "200 m²",
-    },
-    {
-      id: 2,
-      sertifikatNomor: "99",
-      hakPakaiTanggal: "08/01/2015",
-      namaJenisBarang: "TANAH KANTOR",
-      nilaiAset: "Rp20.000.000",
-      alamat:
-        "JL. TRUNOJOYO NO.13, KEPATIHAN, KEC.BOJONEGORO, JAWA TIMUR 62111",
-      luas: "250 m²",
-    },
-  ]);
+  const [data, setData] = useState([]);
+
+  useEffect(async () => {
+    let res = await fetch(apiUrl + '');
+  }, []);
 
   const toggleEditTanah = () => {
     if (openEditTanah) {

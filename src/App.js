@@ -26,7 +26,6 @@ import { DetailBagianPppsUPT } from "./pages/UPT/detailBagianPppsUPT";
 import { TambahBagianPppsUPT } from "./pages/UPT/TambahUPT/tambahBagianPppsUPT";
 import { EditBagianPppsUPT } from "./pages/UPT/EditUPT/editBagianPppsUPT";
 
-
 function App() {
   return (
       <BrowserRouter>
