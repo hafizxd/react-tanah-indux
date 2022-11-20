@@ -107,7 +107,7 @@ export const DashboardAdmin = () => {
                     {emptyMsg == "" ? (
                         <>
                             {dashboardData.map((item) => {
-                                return <DashboardTableRow dashboardItem={item} />;
+                                return <DashboardTableRow title={item.name} dashboardItem={item} />;
                             })}
                         </>
                     ) : (

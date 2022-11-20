@@ -17,7 +17,7 @@ import { EditIndukAdmin } from "./pages/Admin/EditAdmin/editIndukAdmin";
 import { DashboardUPT } from "./pages/UPT/dashboardUPT";
 import { TanahIndukUPT } from "./pages/UPT/tanahIndukUPT";
 import { DetailIndukUPT } from "./pages/UPT/detailIndukUPT";
-import { TambahIndukUPT } from "./pages/UPT/TambahUPT/tambaIndukUPT";
+import { TambahIndukUPT } from "./pages/UPT/TambahUPT/tambahIndukUPT";
 import { EditIndukUPT } from "./pages/UPT/EditUPT/editIndukUPT";
 import { DetailBagianSrUPT } from "./pages/UPT/detailBagianSrUPT";
 import { TambahBagianSrUPT } from "./pages/UPT/TambahUPT/tambahBagianSrUPT";
@@ -47,15 +47,15 @@ function App() {
 
           <Route path="/dashboard/UPT" element={<DashboardUPT />} />
           <Route path="/upt/:id/UPT" element={<TanahIndukUPT />} />
-          <Route path="/upt/:id/UPT/detail" element={<DetailIndukUPT />} />
+          <Route path="/upt/:id/UPT/detail/:induk_id" element={<DetailIndukUPT />} />
           <Route path="/upt/:id/UPT/tambah-induk" element={<TambahIndukUPT />} />
-          <Route path="/upt/:id/UPT/edit-induk" element={<EditIndukUPT />} />
-          <Route path="/upt/:id/UPT/detail/tanah-bagian-sr" element={<DetailBagianSrUPT />} />
-          <Route path="/upt/:id/UPT/detail/tambah-bagian-sr" element={<TambahBagianSrUPT />} />
-          <Route path="/upt/:id/UPT/detail/tanah-bagian-sr/edit" element={<EditBagianSrUPT />} />
-          <Route path="/upt/:id/UPT/detail/tanah-bagian-ppps" element={<DetailBagianPppsUPT />} />
-          <Route path="/upt/:id/UPT/detail/tambah-bagian-ppps" element={<TambahBagianPppsUPT />} />
-          <Route path="/upt/:id/UPT/detail/tanah-bagian-ppps/edit" element={<EditBagianPppsUPT />} />
+          <Route path="/upt/:id/UPT/edit-induk/:induk_id" element={<EditIndukUPT />} />
+          <Route path="/upt/:id/UPT/detail/:induk_id/tanah-bagian-sr/:children_id" element={<DetailBagianSrUPT />} />
+          <Route path="/upt/:id/UPT/detail/:induk_id/tambah-bagian-sr" element={<TambahBagianSrUPT />} />
+          <Route path="/upt/:id/UPT/detail/:induk_id/tanah-bagian-sr/edit/:children_id" element={<EditBagianSrUPT />} />
+          <Route path="/upt/:id/UPT/detail/:induk_id/tanah-bagian-ppps/:children_id" element={<DetailBagianPppsUPT />} />
+          <Route path="/upt/:id/UPT/detail/:induk_id/tambah-bagian-ppps" element={<TambahBagianPppsUPT />} />
+          <Route path="/upt/:id/UPT/detail/:induk_id/tanah-bagian-ppps/edit/:children_id" element={<EditBagianPppsUPT />} />
 
           <Route
             path="*"

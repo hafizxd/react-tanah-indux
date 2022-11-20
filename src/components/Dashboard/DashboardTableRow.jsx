@@ -1,4 +1,4 @@
-export const DashboardTableRow = ({ dashboardItem }) => {
+export const DashboardTableRow = ({ title, dashboardItem }) => {
     const formatter = new Intl.NumberFormat("id-ID", {
         style: "currency",
         currency: "IDR",
@@ -7,7 +7,7 @@ export const DashboardTableRow = ({ dashboardItem }) => {
     return (
         <div className="row row-content">
             <div className="col d-flex align-items-center justify-content-center">
-                {dashboardItem.name}
+                {title}
             </div>
             <div className="col d-flex align-items-center justify-content-center">
                 <div className="row py-2">
@@ -47,7 +47,7 @@ export const DashboardTableRow = ({ dashboardItem }) => {
                     </div>
                     <div className="col">
                         {formatter.format(
-                            dashboardItem.total_rupiah_tanah_retribusi
+                            typeof(dashboardItem.total_rupiah_tanah_retribusi) !== 'undefined' ? dashboardItem.total_rupiah_tanah_retribusi : dashboardItem.total_rupiah_retribusi
                         )}
                     </div>
                 </div>
