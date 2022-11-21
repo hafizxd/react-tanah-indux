@@ -13,6 +13,15 @@ export const DashboardUPT = () => {
     });
 
     const [dashboardData, setDashboardData] = useState([]);
+    const [total, setTotal] = useState({
+        total_tanah_induk: 0,
+        total_tanah_pinjam_pakai: 0,
+        total_tanah_pakai_sendiri: 0,
+        total_tanah_sewa_sip_bmd: 0,
+        total_rupiah_tanah_sewa_sip_bmd: 0,
+        total_tanah_retribusi: 0,
+        total_rupiah_tanah_retribusi: 0
+    });
     const [filterYear, setFilterYear] = useState("2022");
     const [emptyMsg, setEmptyMsg] = useState("");
 
@@ -42,6 +51,17 @@ export const DashboardUPT = () => {
                 }
 
                 setEmptyMsg("");
+
+                setTotal({
+                    total_tanah_induk: resData[0].total_tanah_induk,
+                    total_tanah_pinjam_pakai: resData[0].total_tanah_pinjam_pakai,
+                    total_tanah_pakai_sendiri: resData[0].total_tanah_pakai_sendiri,
+                    total_tanah_sewa_sip_bmd: resData[0].total_tanah_sewa_sip_bmd,
+                    total_rupiah_tanah_sewa_sip_bmd: resData[0].total_rupiah_tanah_sewa_sip_bmd,
+                    total_tanah_retribusi: resData[0].total_tanah_retribusi,
+                    total_rupiah_tanah_retribusi: resData[0].total_rupiah_tanah_retribusi
+                });
+                
                 setDashboardData(resData);
             } catch (error) {
                 console.log(error);
@@ -138,30 +158,30 @@ export const DashboardUPT = () => {
                         TOTAL KESELURUHAN
                     </div>
                     <div className="col d-flex align-items-center justify-content-center">
-                        {dashboardData[0].total_tanah_induk}
+                        {total.total_tanah_induk}
                     </div>
                     <div className="col d-flex flex-col align-items-center justify-content-center">
                         <div className="row py-2">
                             <div className="col">
-                                {dashboardData[0].total_tanah_pinjam_pakai}
+                                {total.total_tanah_pinjam_pakai}
                             </div>
                         </div>
                     </div>
                     <div className="col d-flex flex-col align-items-center justify-content-center">
                         <div className="row py-2">
                             <div className="col">
-                                {dashboardData[0].total_tanah_pakai_sendiri}
+                                {total.total_tanah_pakai_sendiri}
                             </div>
                         </div>
                     </div>
                     <div className="col d-flex flex-col align-items-center justify-content-center">
                         <div className="row py-2">
                             <div className="col">
-                                {dashboardData[0].total_tanah_sewa_sip_bmd}
+                                {total.total_tanah_sewa_sip_bmd}
                             </div>
                             <div className="col">
                                 {formatter.format(
-                                    dashboardData[0]
+                                    total
                                         .total_rupiah_tanah_sewa_sip_bmd
                                 )}
                             </div>
@@ -170,11 +190,11 @@ export const DashboardUPT = () => {
                     <div className="col d-flex flex-col align-items-center justify-content-center">
                         <div className="row py-2">
                             <div className="col">
-                                {dashboardData[0].total_tanah_retribusi}
+                                {total.total_tanah_retribusi}
                             </div>
                             <div className="col">
                                 {formatter.format(
-                                    dashboardData[0].total_rupiah_tanah_retribusi
+                                    total.total_rupiah_tanah_retribusi
                                 )}
                             </div>
                         </div>

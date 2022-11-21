@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import LayoutUPT from "../../components/Layout/layoutUPT";
 import { DeleteConfirmation } from "../../components/UPTDashboard/DeleteConfirmation";
 import { UPTDashboardTableRow } from "../../components/UPTDashboard/UPTDashboardTableRow";
+import ReactPaginate from "react-paginate";
 
 export const TanahIndukUPT = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
@@ -23,6 +24,16 @@ export const TanahIndukUPT = () => {
         return [year, month, day].join("-");
     };
 
+    const handlePageClick = (e) => {
+        if (e.selected >= 0) {
+            setPageNum(e.selected + 1);
+        }
+    };
+
+    const [data, setData] = useState([]);
+    const [pageNum, setPageNum] = useState(1);
+    const [pageCount, setPageCount] = useState(0);
+    const [startingPoint, setStartingPoint] = useState(0);
     const [urlDelete, setUrlDelete] = useState("");
     const [triggerDeleted, setTriggerDeleted] = useState(false);
     const [emptyMsg, setEmptyMsg] = useState("");
@@ -36,14 +47,12 @@ export const TanahIndukUPT = () => {
         luas: "",
     });
 
-    const [data, setData] = useState([]);
-
     useEffect(() => {
         const fetchData = async () => {
             let token = localStorage.getItem("token");
 
             try {
-                let res = await fetch(apiUrl + "parent", {
+                let res = await fetch(apiUrl + "parent?page=" + pageNum, {
                     method: "GET",
                     headers: {
                         "Content-type": "application/json; charset=UTF-8",
@@ -63,6 +72,12 @@ export const TanahIndukUPT = () => {
                     return setEmptyMsg("Tidak ada data.");
                 }
 
+                setPageCount(resJson.data.last_page);
+                setStartingPoint(
+                    resJson.data.per_page * resJson.data.current_page -
+                        (resJson.data.per_page - 1)
+                );
+
                 setEmptyMsg("");
                 setData(resData);
             } catch (error) {
@@ -71,7 +86,7 @@ export const TanahIndukUPT = () => {
         };
 
         fetchData().catch(console.error);
-    }, [params.id, triggerDeleted]);
+    }, [params.id, triggerDeleted, pageNum]);
 
     const toggleEditTanah = () => {
         if (openEditTanah) {
@@ -118,7 +133,7 @@ export const TanahIndukUPT = () => {
                                     {data.map((item, key) => {
                                         return (
                                             <UPTDashboardTableRow
-                                                iterator={key + 1}
+                                                iterator={startingPoint + key}
                                                 upt={params.id}
                                                 key={item.id}
                                                 id={item.id}
@@ -149,6 +164,29 @@ export const TanahIndukUPT = () => {
                                     <div class="text-center">{emptyMsg}</div>
                                 </>
                             )}
+                        </div>
+
+                        <div className="pagination-container">
+                            <ReactPaginate
+                                nextLabel="next >"
+                                onPageChange={handlePageClick}
+                                pageRangeDisplayed={3}
+                                marginPagesDisplayed={2}
+                                pageCount={pageCount}
+                                previousLabel="< previous"
+                                pageClassName="page-item"
+                                pageLinkClassName="page-link"
+                                previousClassName="page-item"
+                                previousLinkClassName="page-link"
+                                nextClassName="page-item"
+                                nextLinkClassName="page-link"
+                                breakLabel="..."
+                                breakClassName="page-item"
+                                breakLinkClassName="page-link"
+                                containerClassName="pagination"
+                                activeClassName="active"
+                                renderOnZeroPageCount={null}
+                            />
                         </div>
                     </div>
                     <DeleteConfirmation

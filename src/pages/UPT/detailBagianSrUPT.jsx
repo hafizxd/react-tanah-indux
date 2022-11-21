@@ -4,6 +4,7 @@ import LayoutUPT from "../../components/Layout/layoutUPT";
 import { ModalPembayaran } from "../../components/Modal/ModalPembayaran";
 import { ButtonDelete } from "../../components/Button/ButtonDelete";
 import { TablePembayaran } from "../../components/Table/TablePembayaran";
+import ReactPaginate from "react-paginate";
 
 export const DetailBagianSrUPT = () => {
     const backendUrl = process.env.REACT_APP_BACKEND_URL;
@@ -37,8 +38,17 @@ export const DetailBagianSrUPT = () => {
         return null;
     };
 
+    const handlePageClick = (e) => {
+        if (e.selected >= 0) {
+            setPageNum(e.selected + 1);
+        }
+    };
+
     const [children, setChildren] = useState({});
     const [payment, setPayment] = useState([]);
+    const [pageNum, setPageNum] = useState(1);
+    const [pageCount, setPageCount] = useState(0);
+    const [startingPoint, setStartingPoint] = useState(0);
     const [emptyMsg, setEmptyMsg] = useState("");
 
     const [triggerDeleted, setTriggerDeleted] = useState(false);
@@ -76,7 +86,11 @@ export const DetailBagianSrUPT = () => {
         const fetchPayment = async () => {
             try {
                 let res = await fetch(
-                    apiUrl + "payment/all/" + params.children_id,
+                    apiUrl +
+                        "payment/all?page=" +
+                        pageNum +
+                        "&childrens_id=" +
+                        params.children_id,
                     {
                         method: "GET",
                         headers: {
@@ -92,6 +106,12 @@ export const DetailBagianSrUPT = () => {
                     return console.log(resJson.message);
                 }
 
+                setPageCount(resJson.data.last_page);
+                setStartingPoint(
+                    resJson.data.per_page * resJson.data.current_page -
+                        (resJson.data.per_page - 1)
+                );
+
                 let resData = resJson.data.data;
                 if (resData.length == 0) return setEmptyMsg("Tidak ada data");
 
@@ -105,7 +125,7 @@ export const DetailBagianSrUPT = () => {
 
         fetchChildren().catch(console.error);
         fetchPayment().catch(console.error);
-    }, [triggerDeleted]);
+    }, [triggerDeleted, pageNum]);
 
     return (
         <LayoutUPT>
@@ -284,13 +304,42 @@ export const DetailBagianSrUPT = () => {
                     <div className="table-informasi-pembayaran">
                         {emptyMsg === "" ? (
                             payment.map((item, key) => {
-                                return <TablePembayaran iterator={key+1} payment={item} triggerDeleted={triggerDeleted} setTriggerDeleted={setTriggerDeleted} />;
+                                return (
+                                    <TablePembayaran
+                                        iterator={startingPoint + key}
+                                        payment={item}
+                                        triggerDeleted={triggerDeleted}
+                                        setTriggerDeleted={setTriggerDeleted}
+                                    />
+                                );
                             })
                         ) : (
                             <>
                                 <div className="text-center">{emptyMsg}</div>
                             </>
                         )}
+                    </div>
+                    <div className="pagination-container">
+                        <ReactPaginate
+                            nextLabel="next >"
+                            onPageChange={handlePageClick}
+                            pageRangeDisplayed={3}
+                            marginPagesDisplayed={2}
+                            pageCount={pageCount}
+                            previousLabel="< previous"
+                            pageClassName="page-item"
+                            pageLinkClassName="page-link"
+                            previousClassName="page-item"
+                            previousLinkClassName="page-link"
+                            nextClassName="page-item"
+                            nextLinkClassName="page-link"
+                            breakLabel="..."
+                            breakClassName="page-item"
+                            breakLinkClassName="page-link"
+                            containerClassName="pagination"
+                            activeClassName="active"
+                            renderOnZeroPageCount={null}
+                        />
                     </div>
                 </div>
             </div>

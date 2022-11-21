@@ -5,6 +5,7 @@ import { ModalTambahBagian } from "../../components/Modal/ModalTambahBagian";
 import { ButtonDelete } from "../../components/Button/ButtonDelete";
 import { TableBagian } from "../../components/Table/TableBagian";
 import { TableBagianPinjamPakai } from "../../components/Table/TabelBagianPinjamPakai";
+import ReactPaginate from "react-paginate";
 
 export const DetailIndukAdmin = ({ induk_id }) => {
     const apiUrl = process.env.REACT_APP_API_URL;
@@ -30,8 +31,17 @@ export const DetailIndukAdmin = ({ induk_id }) => {
         currency: "IDR",
     });
 
+    const handlePageClick = (e) => {
+        if (e.selected >= 0) {
+            setPageNum(e.selected + 1);
+        }
+    };
+
     const [induk, setInduk] = useState({});
     const [children, setChildren] = useState([]);
+    const [pageNum, setPageNum] = useState(1);
+    const [pageCount, setPageCount] = useState(0);
+    const [startingPoint, setStartingPoint] = useState(0);
     const [emptyMsg, setEmptyMsg] = useState("");
 
     useEffect(() => {
@@ -63,7 +73,11 @@ export const DetailIndukAdmin = ({ induk_id }) => {
         const fetchChildren = async () => {
             try {
                 let res = await fetch(
-                    apiUrl + "childer/all?parent_id=" + params.induk_id,
+                    apiUrl +
+                        "childer/all?page=" +
+                        pageNum +
+                        "&parent_id=" +
+                        params.induk_id,
                     {
                         method: "GET",
                         headers: {
@@ -79,6 +93,12 @@ export const DetailIndukAdmin = ({ induk_id }) => {
                     return console.log(resJson.message);
                 }
 
+                setPageCount(resJson.data.last_page);
+                setStartingPoint(
+                    resJson.data.per_page * resJson.data.current_page -
+                        (resJson.data.per_page - 1)
+                );
+
                 let resData = resJson.data.data;
                 if (resData.length == 0) return setEmptyMsg("Tidak ada data");
 
@@ -92,7 +112,7 @@ export const DetailIndukAdmin = ({ induk_id }) => {
 
         fetchInduk().catch(console.error);
         fetchChildren().catch(console.error);
-    }, []);
+    }, [pageNum]);
 
     return (
         <LayoutAdmin>
@@ -235,7 +255,7 @@ export const DetailIndukAdmin = ({ induk_id }) => {
                                 ) {
                                     return (
                                         <TableBagianPinjamPakai
-                                            iterator={key+1}
+                                            iterator={startingPoint + key}
                                             upt={params.id}
                                             children={item}
                                         />
@@ -248,7 +268,7 @@ export const DetailIndukAdmin = ({ induk_id }) => {
                                 ) {
                                     return (
                                         <TableBagian
-                                            iterator={key+1}
+                                            iterator={startingPoint + key}
                                             upt={params.id}
                                             children={item}
                                         />
@@ -260,6 +280,29 @@ export const DetailIndukAdmin = ({ induk_id }) => {
                                 <div className="text-center">{emptyMsg}</div>
                             </>
                         )}
+                    </div>
+
+                    <div className="pagination-container">
+                        <ReactPaginate
+                            nextLabel="next >"
+                            onPageChange={handlePageClick}
+                            pageRangeDisplayed={3}
+                            marginPagesDisplayed={2}
+                            pageCount={pageCount}
+                            previousLabel="< previous"
+                            pageClassName="page-item"
+                            pageLinkClassName="page-link"
+                            previousClassName="page-item"
+                            previousLinkClassName="page-link"
+                            nextClassName="page-item"
+                            nextLinkClassName="page-link"
+                            breakLabel="..."
+                            breakClassName="page-item"
+                            breakLinkClassName="page-link"
+                            containerClassName="pagination"
+                            activeClassName="active"
+                            renderOnZeroPageCount={null}
+                        />
                     </div>
                 </div>
             </div>
