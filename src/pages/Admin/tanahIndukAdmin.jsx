@@ -120,9 +120,10 @@ export const TanahIndukAdmin = () => {
                         <div className="row m-0">
                             {emptyMsg == "" ? (
                                 <>
-                                    {data.map((item) => {
+                                    {data.map((item, key) => {
                                         return (
                                             <IndukTableRowAdmin
+                                                iterator={key+1}
                                                 upt={params.id}
                                                 key={item.id}
                                                 id={item.id}

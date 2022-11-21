@@ -283,8 +283,8 @@ export const DetailBagianSrUPT = () => {
                     </div>
                     <div className="table-informasi-pembayaran">
                         {emptyMsg === "" ? (
-                            payment.map((item) => {
-                                return <TablePembayaran payment={item} triggerDeleted={triggerDeleted} setTriggerDeleted={setTriggerDeleted} />;
+                            payment.map((item, key) => {
+                                return <TablePembayaran iterator={key+1} payment={item} triggerDeleted={triggerDeleted} setTriggerDeleted={setTriggerDeleted} />;
                             })
                         ) : (
                             <>

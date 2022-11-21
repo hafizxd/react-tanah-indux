@@ -5,7 +5,21 @@ import LayoutAdmin from "../../components/Layout/layoutAdmin";
 export const DashboardAdmin = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
 
+    const formatter = new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+    });
+
     const [dashboardData, setDashboardData] = useState([]);
+    const [total, setTotal] = useState({
+        total_tanah_induk: 0,
+        total_tanah_pinjam_pakai: 0,
+        total_tanah_pakai_sendiri: 0,
+        total_tanah_sewa_sip_bmd: 0,
+        total_rupiah_tanah_sewa_sip_bmd: 0,
+        total_tanah_retribusi: 0,
+        total_rupiah_tanah_retribusi: 0
+    });
     const [filterYear, setFilterYear] = useState('2022');
     const [emptyMsg, setEmptyMsg] = useState("");
 
@@ -35,6 +49,36 @@ export const DashboardAdmin = () => {
                 }
 
                 setEmptyMsg("");
+
+                let totalTanahInduk = 0;
+                let tanahPinjamPakai = 0;
+                let tanahPakaiSendiri = 0;
+                let tanahSewaSipBmd = 0;
+                let rupiahTanahSewaSipBms = 0;
+                let tanahRetribusi = 0;
+                let rupiahTanahRetribusi = 0;
+
+                // Set dashboard total
+                resData.forEach((item, key) => {
+                    totalTanahInduk += item.total_tanah_induk;
+                    tanahPinjamPakai += item.total_tanah_pinjam_pakai;
+                    tanahPakaiSendiri += item.total_tanah_pakai_sendiri;
+                    tanahSewaSipBmd += item.total_tanah_sewa_sip_bmd;
+                    rupiahTanahSewaSipBms += item.total_rupiah_tanah_sewa_sip_bmd;
+                    tanahRetribusi += item.total_tanah_retribusi;
+                    rupiahTanahRetribusi += item.total_rupiah_tanah_retribusi;
+                });
+
+                setTotal({
+                    total_tanah_induk: totalTanahInduk,
+                    total_tanah_pinjam_pakai: tanahPinjamPakai,
+                    total_tanah_pakai_sendiri: tanahPakaiSendiri,
+                    total_tanah_sewa_sip_bmd: tanahSewaSipBmd,
+                    total_rupiah_tanah_sewa_sip_bmd: rupiahTanahSewaSipBms,
+                    total_tanah_retribusi: tanahRetribusi,
+                    total_rupiah_tanah_retribusi: rupiahTanahRetribusi
+                });
+
                 setDashboardData(resData);
             } catch (error) {
                 console.log(error);
@@ -126,28 +170,28 @@ export const DashboardAdmin = () => {
                         TOTAL KESELURUHAN
                     </div>
                     <div className="col d-flex align-items-center justify-content-center">
-                        500
+                        {total.total_tanah_induk}
                     </div>
                     <div className="col d-flex flex-col align-items-center justify-content-center">
                         <div className="row py-2">
-                            <div className="col">500</div>
+                            <div className="col">{total.total_tanah_pinjam_pakai}</div>
                         </div>
                     </div>
                     <div className="col d-flex flex-col align-items-center justify-content-center">
                         <div className="row py-2">
-                            <div className="col">500</div>
+                            <div className="col">{total.total_tanah_pakai_sendiri}</div>
                         </div>
                     </div>
                     <div className="col d-flex flex-col align-items-center justify-content-center">
                         <div className="row py-2">
-                            <div className="col">500</div>
-                            <div className="col">5.000.000</div>
+                            <div className="col">{total.total_rupiah_tanah_sewa_sip_bmd}</div>
+                            <div className="col">{formatter.format(total.total_rupiah_tanah_sewa_sip_bmd)}</div>
                         </div>
                     </div>
                     <div className="col d-flex flex-col align-items-center justify-content-center">
                         <div className="row py-2">
-                            <div className="col">500</div>
-                            <div className="col">5.000.000</div>
+                            <div className="col">{total.total_tanah_retribusi}</div>
+                            <div className="col">{formatter.format(total.total_rupiah_tanah_retribusi)}</div>
                         </div>
                     </div>
                 </div>

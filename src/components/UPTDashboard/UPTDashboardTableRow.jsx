@@ -3,6 +3,7 @@ import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export const UPTDashboardTableRow = ({
+  iterator,
   id,
   sertifikatNomor,
   hakPakaiTanggal,
@@ -24,7 +25,7 @@ export const UPTDashboardTableRow = ({
       style={{ width: "95%", borderRadius: "5px", minHeight: "80px" }}
     >
       <Link to={"/upt/"+upt+"/upt/detail/"+id} className="col number d-flex align-items-center justify-content-center font-semibold ">
-        {id}
+        {iterator}
       </Link>
       <UPTDashboardTableCol title="SERTIFIKAT NOMOR" value={sertifikatNomor} />
       <UPTDashboardTableCol title="HAK PAKAI TANGGAL" value={hakPakaiTanggal} />

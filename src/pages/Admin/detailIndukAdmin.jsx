@@ -226,7 +226,7 @@ export const DetailIndukAdmin = ({ induk_id }) => {
                     </div>
                     <div className="table-tanah-bagian">
                         {emptyMsg === "" ? (
-                            children.map((item) => {
+                            children.map((item, key) => {
                                 if (
                                     item.utilization_engagement_type ==
                                         "pinjam_pakai" ||
@@ -235,6 +235,7 @@ export const DetailIndukAdmin = ({ induk_id }) => {
                                 ) {
                                     return (
                                         <TableBagianPinjamPakai
+                                            iterator={key+1}
                                             upt={params.id}
                                             children={item}
                                         />
@@ -247,6 +248,7 @@ export const DetailIndukAdmin = ({ induk_id }) => {
                                 ) {
                                     return (
                                         <TableBagian
+                                            iterator={key+1}
                                             upt={params.id}
                                             children={item}
                                         />
