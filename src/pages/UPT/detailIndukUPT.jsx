@@ -39,6 +39,7 @@ export const DetailIndukUPT = ({ induk_id }) => {
 
     const [induk, setInduk] = useState({});
     const [children, setChildren] = useState([]);
+    const [search, setSearch] = useState("");
     const [pageNum, setPageNum] = useState(1);
     const [pageCount, setPageCount] = useState(0);
     const [startingPoint, setStartingPoint] = useState(0);
@@ -77,7 +78,9 @@ export const DetailIndukUPT = ({ induk_id }) => {
                         "childer/all?page=" +
                         pageNum +
                         "&parent_id=" +
-                        params.induk_id,
+                        params.induk_id +
+                        "&keyword=" +
+                        search,
                     {
                         method: "GET",
                         headers: {
@@ -93,13 +96,19 @@ export const DetailIndukUPT = ({ induk_id }) => {
                     return console.log(resJson.message);
                 }
 
-                setPageCount(resJson.data.last_page);
-                setStartingPoint(
-                    resJson.data.per_page * resJson.data.current_page -
-                        (resJson.data.per_page - 1)
-                );
+                // Check if result is from search
+                if (Array.isArray(resJson.data)) {
+                    setPageCount(1);
+                    setStartingPoint(1);
+                } else {
+                    setPageCount(resJson.data.last_page);
+                    setStartingPoint(
+                        resJson.data.per_page * resJson.data.current_page -
+                            (resJson.data.per_page - 1)
+                    );
+                }
 
-                let resData = resJson.data.data;
+                let resData = Array.isArray(resJson.data) ? resJson.data : resJson.data.data;
                 if (resData.length == 0) return setEmptyMsg("Tidak ada data");
 
                 setEmptyMsg("");
@@ -112,7 +121,7 @@ export const DetailIndukUPT = ({ induk_id }) => {
 
         fetchInduk().catch(console.error);
         fetchChildren().catch(console.error);
-    }, [pageNum]);
+    }, [pageNum, search]);
 
     return (
         <LayoutUPT>
@@ -227,6 +236,8 @@ export const DetailIndukUPT = ({ induk_id }) => {
                                 type="search"
                                 placeholder="Search"
                                 aria-label="Search"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
                             ></input>
                             <div
                                 className="secondary-btn d-flex align-items-center me-2"

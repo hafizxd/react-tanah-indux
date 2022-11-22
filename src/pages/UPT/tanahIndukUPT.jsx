@@ -34,6 +34,7 @@ export const TanahIndukUPT = () => {
     const [pageNum, setPageNum] = useState(1);
     const [pageCount, setPageCount] = useState(0);
     const [startingPoint, setStartingPoint] = useState(0);
+    const [search, setSearch] = useState("");
     const [urlDelete, setUrlDelete] = useState("");
     const [triggerDeleted, setTriggerDeleted] = useState(false);
     const [emptyMsg, setEmptyMsg] = useState("");
@@ -52,13 +53,16 @@ export const TanahIndukUPT = () => {
             let token = localStorage.getItem("token");
 
             try {
-                let res = await fetch(apiUrl + "parent?page=" + pageNum, {
-                    method: "GET",
-                    headers: {
-                        "Content-type": "application/json; charset=UTF-8",
-                        Authorization: "Bearer " + token,
-                    },
-                });
+                let res = await fetch(
+                    apiUrl + "parent?page=" + pageNum + "&keyword=" + search,
+                    {
+                        method: "GET",
+                        headers: {
+                            "Content-type": "application/json; charset=UTF-8",
+                            Authorization: "Bearer " + token,
+                        },
+                    }
+                );
 
                 let resJson = await res.json();
 
@@ -66,17 +70,25 @@ export const TanahIndukUPT = () => {
                     return console.log(resJson.message);
                 }
 
-                let resData = resJson.data.data;
+                // Check if result is from search
+                if (Array.isArray(resJson.data)) {
+                    setPageCount(1);
+                    setStartingPoint(1);
+                } else {
+                    setPageCount(resJson.data.last_page);
+                    setStartingPoint(
+                        resJson.data.per_page * resJson.data.current_page -
+                            (resJson.data.per_page - 1)
+                    );
+                }
+
+                let resData = Array.isArray(resJson.data)
+                    ? resJson.data
+                    : resJson.data.data;
 
                 if (resData.length == 0) {
                     return setEmptyMsg("Tidak ada data.");
                 }
-
-                setPageCount(resJson.data.last_page);
-                setStartingPoint(
-                    resJson.data.per_page * resJson.data.current_page -
-                        (resJson.data.per_page - 1)
-                );
 
                 setEmptyMsg("");
                 setData(resData);
@@ -86,7 +98,7 @@ export const TanahIndukUPT = () => {
         };
 
         fetchData().catch(console.error);
-    }, [params.id, triggerDeleted, pageNum]);
+    }, [params.id, triggerDeleted, pageNum, search]);
 
     const toggleEditTanah = () => {
         if (openEditTanah) {
@@ -116,6 +128,8 @@ export const TanahIndukUPT = () => {
                                 type="search"
                                 placeholder="Search"
                                 aria-label="Search"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
                             ></input>
                             <Link
                                 to={"/upt/" + params.id + "/upt/tambah-induk"}
