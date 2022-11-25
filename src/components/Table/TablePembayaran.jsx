@@ -7,6 +7,8 @@ export const TablePembayaran = ({
     payment,
     triggerDeleted,
     setTriggerDeleted,
+    setShowEdit,
+    setPaymentEdit,
 }) => {
     const backendUrl = process.env.REACT_APP_BACKEND_URL;
     const apiUrl = process.env.REACT_APP_API_URL;
@@ -68,19 +70,23 @@ export const TablePembayaran = ({
                     </p>
                 </div>
                 <div className="col d-flex gap-2 align-items-center justify-content-center w-100 p-0">
-                    {/* <div
-            className="d-flex justify-content-center align-items-center p-1 btn"
-            style={{
-              color: "#286973",
-              borderRadius: "50%",
-              background: "#EDF9FB",
-              aspectRatio: "1",
-              flexShrink: "none",
-              fontSize: "20px",
-            }}
-          >
-            <FaRegEdit />
-          </div> */}
+                    <div
+                        className="d-flex justify-content-center align-items-center p-1 btn"
+                        style={{
+                            color: "#286973",
+                            borderRadius: "50%",
+                            background: "#EDF9FB",
+                            aspectRatio: "1",
+                            flexShrink: "none",
+                            fontSize: "20px",
+                        }}
+                        onClick={() => {
+                            setShowEdit(true);
+                            setPaymentEdit(payment);
+                        }}
+                    >
+                        <FaRegEdit />
+                    </div>
                     <div
                         className="d-flex justify-content-center align-items-center p-1 btn"
                         style={{

@@ -2,6 +2,7 @@ import { useNavigate, Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import LayoutAdmin from "../../components/Layout/layoutAdmin";
 import { ModalPembayaran } from "../../components/Modal/ModalPembayaran";
+import { ModalPembayaranEdit } from "../../components/Modal/ModalPembayaranEdit";
 import { ButtonDelete } from "../../components/Button/ButtonDelete";
 import { TablePembayaran } from "../../components/Table/TablePembayaran";
 import ReactPaginate from "react-paginate";
@@ -12,10 +13,13 @@ export const DetailBagianSrAdmin = () => {
 
     const navigate = useNavigate();
     const [show, setShow] = useState(false);
+    const [showEdit, setShowEdit] = useState(false);
     const params = useParams();
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const handleCloseEdit = () => setShowEdit(false);
+    const handleShowEdit = () => setShowEdit(true);
 
     //format date into yyyy-mm-dd with leading zero
     const formatDate = (date) => {
@@ -50,6 +54,7 @@ export const DetailBagianSrAdmin = () => {
     const [pageCount, setPageCount] = useState(0);
     const [startingPoint, setStartingPoint] = useState(0);
     const [emptyMsg, setEmptyMsg] = useState("");
+    const [paymentEdit, setPaymentEdit] = useState({});
 
     const [triggerDeleted, setTriggerDeleted] = useState(false);
 
@@ -137,6 +142,17 @@ export const DetailBagianSrAdmin = () => {
                 setParentPayment={setPayment}
                 setEmptyMsg={setEmptyMsg}
             />
+
+            <ModalPembayaranEdit
+                showEdit={showEdit}
+                handleCloseEdit={handleCloseEdit}
+                handleShowEdit={handleShowEdit}
+                parentPayment={payment}
+                setParentPayment={setPayment}
+                paymentEdit={paymentEdit}
+                setPaymentEdit={setPaymentEdit}
+            />
+
             <div
                 className="d-flex justify-content-between align-items-center mx-3 py-3"
                 style={{
@@ -310,6 +326,8 @@ export const DetailBagianSrAdmin = () => {
                                         payment={item}
                                         triggerDeleted={triggerDeleted}
                                         setTriggerDeleted={setTriggerDeleted}
+                                        setShowEdit={setShowEdit}
+                                        setPaymentEdit={setPaymentEdit}
                                     />
                                 );
                             })
